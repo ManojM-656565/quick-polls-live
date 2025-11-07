@@ -2,9 +2,9 @@ const userModel = require("../models/user.model");
 const bcrypt=require('bcryptjs');
 const jwt=require('jsonwebtoken');
 
-const register=async()=>{
+const register=async(req,res)=>{
     const{name,password,email,role}=req.body;
-    if(!name||!password||!email||!role){
+    if(!name||!password||!email){
        return res.status(400).json({message:"Fields are missing"});
     }
 
@@ -37,15 +37,15 @@ const register=async()=>{
     }
     catch(error){
         console.error(error);
-        res.status(500).json({message:"Internal server error"});
+        res.status(500).json({message:"Internal server err"});
     }
 
 }
 
-const login=async()=>{
+const login=async(req,res)=>{
     const {email,password}=req.body;
     try{
-        const user=userModel.findOne({email});
+        const user=await userModel.findOne({email});
         if(!user){
             res.status(401).json({message:"Invalid user credentials"});
         }
@@ -79,4 +79,18 @@ const login=async()=>{
     }
 }
 
-module.exports={register,login}
+const logout=async(req,res)=>{
+    try{
+        res.cookie("token","",{
+            maxAge:0
+        });
+        res.status(200).json({message:"Logged out successfully"})
+    }
+    catch(error){
+        res.status(500).json({message:"Internal server error"});
+    }
+}
+
+
+
+module.exports={register,login,logout}
