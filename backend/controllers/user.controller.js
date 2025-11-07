@@ -79,4 +79,4 @@ const login=async()=>{
     }
 }
 
-module.exports={register}
+module.exports={register,login}
