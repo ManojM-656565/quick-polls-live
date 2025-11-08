@@ -3,6 +3,7 @@ const dotenv=require('dotenv');
 const { connectDB } = require('./lib/db');
 const authRoutes =require("./routes/user.route");
 const pollRoutes=require('./routes/poll.routes')
+const voteRotes=require("./routes/vote.route")
 const cors=require("cors")
 const cookieParser = require("cookie-parser");
 
@@ -20,6 +21,7 @@ app.use(cors({
 
 app.use("/api/auth",authRoutes);
 app.use("/api/polls",pollRoutes);
+app.use("/api/vote",voteRotes);
 
 
 const PORT=process.env.PORT;

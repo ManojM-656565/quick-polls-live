@@ -1,0 +1,36 @@
+const Poll=require("../models/poll.model")
+const Vote=require("../models/vote.model")
+
+const castVote=async(req,res)=>{
+    try{
+        const {pollId,optionId}=req.body;
+        const userId=req.user._id;
+
+        const poll=await Poll.findById(pollId);
+        if(!poll) return res.status(404).json({message:"Poll not found"});
+
+        if(new Date()>new Date(poll.expiryTime)){
+            return res.status(400).json({message:"Poll has expired"});
+        }
+
+        const alreadyVoted=await Vote.findOne({pollId,userId});
+        if(alreadyVoted){
+            return res.status(400).json({message:"You have already voted"});
+        }
+
+        const vote=await Vote.create({pollId,optionId,userId});
+
+        await Poll.updateOne(
+            {_id:pollId,"options._id":optionId},
+            {$inc:{"options.$.voteCount":1,totalVotes:1}}
+        )
+
+        ///socket io for future
+
+        res.status(200).json({message:"Vote casted successfully",vote});
+    }
+    catch(error){
+        console.error(error)
+        res.status(500).json({message:"Internal server error"});
+    }
+}
