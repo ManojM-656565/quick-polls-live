@@ -10,7 +10,7 @@ const register=async(req,res)=>{
 
     try{
         const exist=userModel.findOne({email});
-        if(exist){
+        if(!exist){
             return res.status(400).json({message:"Email already exists"});
         }
         const hashed=await bcrypt.hash(password,10);
