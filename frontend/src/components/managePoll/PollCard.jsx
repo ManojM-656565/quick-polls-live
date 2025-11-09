@@ -1,0 +1,38 @@
+import React from 'react'
+
+const PollCard = () => {
+    const title="kwrmgk"
+    const status="ergrg"
+    const createdBy="tdyty"
+    const expiryDate="uhwrugf"
+  return (
+   <div className="p-4 border-4 border-red-300">
+            <h4 className="text-lg font-semibold mb-2">{title}</h4>
+            <div className="text-sm space-y-1 mb-4">
+                <p>Status: <strong className="uppercase">{status}</strong></p>
+                <p>Expires: {expiryDate.toLocaleString()}</p>
+                {createdBy && <p>Created By: {createdBy.name || createdBy.email}</p>}
+            </div>
+
+            <div className="flex flex-wrap gap-2">
+                <button 
+                    className="py-1 px-3 text-sm bg-red-500 text-white rounded-md"
+                >
+                    Edit
+                </button>
+                <button 
+                    className="py-1 px-3 text-sm bg-red-600 text-white rounded-md"
+                >
+                    Gen Result
+                </button>
+                <button 
+                    className="py-1 px-3 text-sm bg-red-600 text-white rounded-md"
+                >
+                    Delete
+                </button>
+            </div>
+        </div>
+  )
+}
+
+export default PollCard

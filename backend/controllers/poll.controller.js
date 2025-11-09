@@ -44,7 +44,7 @@ const getAll=async(req,res)=>{
 
 const getPolls=async(req,res)=>{
     try{
-        const polls=(await Poll.find()).sort({createdAt:-1});
+        const polls=(await Poll.find({createdBy:req.user._id})).sort({createdAt:-1});
         res.status(200).json({polls});
     }
     catch(error){
@@ -147,4 +147,4 @@ const generateResult=async(req,res) =>{
     }
 }
 
-module.exports={create,getAll,getById,update,deletePoll,generateResult};
+module.exports={create,getAll,getById,update,deletePoll,generateResult,getPolls};
