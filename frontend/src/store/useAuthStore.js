@@ -39,5 +39,14 @@ export const useAuthStore=create((set,get)=>({
       toast.error(error.response?.data?.message || "Logout failed");
     }
   },
+  checkAuth: async () => {
+    try {
+      const res = await axiosInstance.get("/auth/check", { withCredentials: true });
+      set({ user: res.data });
+    } catch (error) {
+      console.log("Auth check failed", error);
+      set({ user: null });
+    } 
+  },
 
 }))
