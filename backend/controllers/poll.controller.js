@@ -101,4 +101,50 @@ const deletePoll=async(req,res)=>{
     }
 }
 
-module.exports={create,getAll,getById,update,deletePoll};
+
+const generateResult=async(req,res) =>{
+    try{
+        const poll =await Poll.findById(req.params.id);
+        if(!poll) return res.status(404).json({message:"Poll not found"});
+
+        const totalVotes=poll.options.reduce((s,o)=>s+o.voteCount,0)
+
+        const winnerOption=null;
+        winnerOption=poll.options.reduce((max,o)=>
+            o.voteCount>max.voteCount ? o: max
+        )
+
+        const engagementRatio=0  //update later
+        const options=poll.options.map(option=>({
+            optionId:option._id,
+            text:option.text,
+            voteCount:opt.voteCount,
+            percentage:Number((option.voteCount/totalVotes)*100)
+        }));
+
+
+        const result=new Result({
+            pollId:poll._id,
+            title:poll.title,
+            description:poll.description,
+            options:options,
+            winnerOptionId:winnerOption._id,
+            engagementRatio,
+        })
+
+        await result.save();
+
+        poll.status="expired"
+        await poll.save();
+
+        res.status(201).json({message:"Result generated successfully",
+        result,
+        });
+    }
+    catch(error){
+        console.error(error);
+        res.status(500).json({message:"Internal server error"});
+    }
+}
+
+module.exports={create,getAll,getById,update,deletePoll,generateResult};
