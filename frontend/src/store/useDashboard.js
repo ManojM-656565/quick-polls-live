@@ -1,5 +1,6 @@
 import {create} from 'zustand'
 import { axiosInstance } from '../../lib/axios'
+import { socket } from '../../lib/socket';
 
 export const useDashboardStore=create((set)=>({
     stats:null,
@@ -26,6 +27,16 @@ export const useDashboardStore=create((set)=>({
         catch(error){
             console.error(error);
         }
-    }
+    },
+     listenForUpdates:()=>{
+            socket.on("voteUpdate",(updatedPoll)=>{
+                console.log(updatedPoll);
+                set((state)=>({
+                    polls:state.polls.map((p)=>p._id===updatedPoll._id?updatedPoll:p
+                    ),
+                }))
+            })
+    
+        }
     
 }))

@@ -8,13 +8,19 @@ import ManagePoll from "./pages/ManagePoll";
 import Dashboard from "./pages/Dashboard";
 import { useAuthStore } from "./store/useAuthStore";
 import { useEffect } from "react";
+import { useDashboardStore } from "./store/useDashboard";
 
 export default function App() {
   const { user, checkAuth } = useAuthStore();
+  const { listenForUpdates } = useDashboardStore();
 
   useEffect(() => {
     checkAuth();
   }, [checkAuth]);
+
+  useEffect(() => {
+    listenForUpdates();
+  }, []);
   return (
     <BrowserRouter>
       <Toaster />

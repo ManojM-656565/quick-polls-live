@@ -1,6 +1,7 @@
 import {create} from 'zustand';
 import { axiosInstance } from '../../lib/axios';
 import toast from 'react-hot-toast';
+import { socket } from '../../lib/socket';
 
 export const usePollForm=create((set,get)=>({
 
@@ -56,6 +57,16 @@ export const usePollForm=create((set,get)=>({
     },
     clearResult:()=>{
         set({resultData:null})
-    }
+    },
+    // listenForUpdates:()=>{
+    //     socket.on("voteUpdate",(updatedPoll)=>{
+    //         console.log(updatedPoll);
+    //         set((state)=>({
+    //             polls:state.polls.map((p)=>p._id===updatedPoll._id?updatedPoll:p
+    //             ),
+    //         }))
+    //     })
+
+    // }
     
 }))

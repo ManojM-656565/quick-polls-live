@@ -13,10 +13,10 @@ const castVote=async(req,res)=>{
             return res.status(400).json({message:"Poll has expired"});
         }
 
-        const alreadyVoted=await Vote.findOne({poll:pollId,user:userId});
-        if(alreadyVoted){
-            return res.status(400).json({message:"You have already voted"});
-        }
+        // const alreadyVoted=await Vote.findOne({poll:pollId,user:userId});
+        // if(alreadyVoted){
+        //     return res.status(400).json({message:"You have already voted"});
+        // }
 
         const vote=await Vote.create({poll:pollId,option:optionId,user:userId});
 
@@ -26,6 +26,8 @@ const castVote=async(req,res)=>{
         )
 
         ///socket io for future
+         const updatedPoll = await Poll.findById(pollId);
+         io.emit("voteUpdate", updatedPoll);
 
         res.status(200).json({message:"Vote casted successfully",vote});
     }
