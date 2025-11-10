@@ -11,7 +11,7 @@ const PollCardVote = ({poll}) => {
   return (
 
     <div className='p-6 shadow-md rounded-lg border-2 border-red-200'>
-    <h3 className='text-xl font-bold mb-2 text-gray-200'>{title}</h3>
+    <h3 className='text-xl font-bold mb-2 text-red-400'>{title}</h3>
     <p className='text=gray-400 mb-4'>{description}</p>
     <form onSubmit={handleSubmit} className="space-y-3">
                 <div className="space-y-2">

@@ -1,7 +1,9 @@
 import React from 'react'
 import { useState } from 'react'
+import { usePollForm } from '../../store/usePollStore';
 
 const PollForm = () => {
+    const {create}=usePollForm();
     const [pollData,setPollData]=useState({
         title:"",
         description:"",
@@ -30,11 +32,17 @@ const PollForm = () => {
 
     const handleSubmit=async(e)=>{
         e.preventDefault();
+        create(pollData);
+        setPollData({
+            title:'',
+            description:'',
+            options:[],
+            expiryTime:'',
+        })
     }
   return (
     <div className='p-6'>
         <h3 className='text-2xl p-6'>Create New Poll</h3>
-        <form onSubmit={handleSubmit} className='space-y-4'>
           <form onSubmit={handleSubmit} className="space-y-4">
                 
                 <div>
@@ -112,7 +120,6 @@ const PollForm = () => {
                 </button>
                
             </form>
-        </form>
     </div>
   )
 }

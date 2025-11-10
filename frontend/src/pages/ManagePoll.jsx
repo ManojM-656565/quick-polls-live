@@ -1,15 +1,16 @@
+import { useEffect } from "react";
 import PollCard from "../components/managePoll/PollCard"
 import PollForm from "../components/managePoll/PollForm"
+import { usePollForm } from "../store/usePollStore"
 
 const ManagePoll = () => {
-    const polls=[
-        {
-            title:"lkjnflkj",
-            createdBy:"urgh",
-            expiryDate:"hjbc",
-            status:"jkwdb"
-        }
-    ]
+   const {getPolls,polls}=usePollForm();
+   const fetchPolls=()=>{
+    getPolls();
+   }
+   useEffect(()=>{
+    fetchPolls();
+   },[])
   return (
     <div className="min-h-screen p-6">
     <h1 className="text-4xl font-bold pb-2">Manage Polls</h1>
