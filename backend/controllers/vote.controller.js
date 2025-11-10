@@ -13,12 +13,12 @@ const castVote=async(req,res)=>{
             return res.status(400).json({message:"Poll has expired"});
         }
 
-        const alreadyVoted=await Vote.findOne({pollId,userId});
+        const alreadyVoted=await Vote.findOne({poll:pollId,user:userId});
         if(alreadyVoted){
             return res.status(400).json({message:"You have already voted"});
         }
 
-        const vote=await Vote.create({pollId,optionId,userId});
+        const vote=await Vote.create({poll:pollId,option:optionId,user:userId});
 
         await Poll.updateOne(
             {_id:pollId,"options._id":optionId},

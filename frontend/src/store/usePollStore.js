@@ -19,6 +19,8 @@ export const usePollForm=create((set,get)=>({
     getPolls:async()=>{
         try{
             const res=await axiosInstance.get("/polls/getPolls");
+   console.log(res);
+
             set({polls:res.data.polls});
             toast.success(res.data.message||"The Data Fetched Successfully");
         }
@@ -36,7 +38,5 @@ export const usePollForm=create((set,get)=>({
             toast.error(error.response?.data?.message)
         }
     },
-    castVote:async()=>{
-        
-    }
+    
 }))

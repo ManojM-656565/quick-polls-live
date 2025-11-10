@@ -27,8 +27,8 @@ const Navbar = () => {
       {
         user?(
             <>
-                <p className='text-xl'>Hi, {user.name}</p>
-                <button onClick={handleLogout}>Logout</button>
+                <button onClick={handleLogout} className='bg-red-400 rounded-md p-2'>Logout</button>
+                <p className='text-xl bg-gray-400 rounded-full p-2'>{(user.name)}</p>
             </>
         ):(
             <>

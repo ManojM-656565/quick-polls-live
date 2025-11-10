@@ -1,12 +1,25 @@
 import React from 'react'
 import { useState } from 'react';
+import { axiosInstance } from '../../../lib/axios';
+import toast from 'react-hot-toast';
 
 const PollCardVote = ({poll}) => {
     const [selectedOption, setSelectedOption] = useState(null);
-    const {title,description,options}=poll
+    const {_id:pollId,title,description,options}=poll
 
     const handleSubmit=async(e)=>{
         e.preventDefault();
+        try{
+            const res=await axiosInstance.post("/vote/cast",{
+                pollId,
+                optionId:selectedOption
+            })
+            toast.success("Vote casted successfully")
+        }
+        catch(error){
+            toast.error(error.response.data.message)
+            console.log(error);
+        }
     }
   return (
 
