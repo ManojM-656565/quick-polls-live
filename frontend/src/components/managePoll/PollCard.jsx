@@ -1,8 +1,10 @@
 import React from "react";
+import { usePollForm } from "../../store/usePollStore";
 
 const PollCard = ({ poll }) => {
-  const { title, status, createdBy, expiryTime } = poll;
+  const { _id:pollId,title, status, createdBy, expiryTime } = poll;
   const expiryDate = new Date(expiryTime);
+  const {genResult}=usePollForm();
 
   const formattedExpiry = expiryDate.toLocaleString("en-US", {
     year: "numeric",
@@ -11,6 +13,9 @@ const PollCard = ({ poll }) => {
     hour: "2-digit",
     minute: "2-digit",
   });
+  const handleResult=()=>{
+    genResult(pollId);
+  }
 
   return (
     <div className="p-4 border-4 border-red-300">
@@ -27,7 +32,7 @@ const PollCard = ({ poll }) => {
         <button className="py-1 px-3 text-sm bg-red-500 text-white rounded-md">
           Edit
         </button>
-        <button className="py-1 px-3 text-sm bg-red-600 text-white rounded-md">
+        <button onClick={handleResult} className="py-1 px-3 text-sm bg-red-600 text-white rounded-md">
           Gen Result
         </button>
         <button className="py-1 px-3 text-sm bg-red-600 text-white rounded-md">

@@ -1,4 +1,5 @@
 const Poll =require("../models/poll.model")
+const Result=require("../models/result.model")
 
 const create=async(req,res)=>{
     try{
@@ -108,8 +109,13 @@ const generateResult=async(req,res) =>{
         if(!poll) return res.status(404).json({message:"Poll not found"});
 
         const totalVotes=poll.options.reduce((s,o)=>s+o.voteCount,0)
+    if (totalVotes === 0) {
+      return res.status(400).json({
+        message: "Cannot generate result — no votes inside",
+      });
+    }
 
-        const winnerOption=null;
+        let winnerOption=null;
         winnerOption=poll.options.reduce((max,o)=>
             o.voteCount>max.voteCount ? o: max
         )
@@ -118,7 +124,7 @@ const generateResult=async(req,res) =>{
         const options=poll.options.map(option=>({
             optionId:option._id,
             text:option.text,
-            voteCount:opt.voteCount,
+            voteCount:option.voteCount,
             percentage:Number((option.voteCount/totalVotes)*100)
         }));
 

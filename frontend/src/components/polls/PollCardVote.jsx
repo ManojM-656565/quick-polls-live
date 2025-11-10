@@ -5,7 +5,7 @@ import toast from 'react-hot-toast';
 
 const PollCardVote = ({poll}) => {
     const [selectedOption, setSelectedOption] = useState(null);
-    const {_id:pollId,title,description,options}=poll
+    const {_id:pollId,title,description,options,status}=poll
 
     const handleSubmit=async(e)=>{
         e.preventDefault();
@@ -48,13 +48,24 @@ const PollCardVote = ({poll}) => {
                         </div>
                     ))}
                 </div>
+               {status==="expired"?
 
+                <button
+                    type="submit"
+                    className="w-full py-2 px-4 mt-4 bg-gray-600 text-white font-semibold rounded-md"
+                    disabled
+                >
+                    Poll Expired
+                </button>
+                :
                 <button
                     type="submit"
                     className="w-full py-2 px-4 mt-4 bg-red-600 text-white font-semibold rounded-md"
                 >
                     Vote
                 </button>
+
+               }
 
                
             </form>

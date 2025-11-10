@@ -38,5 +38,17 @@ export const usePollForm=create((set,get)=>({
             toast.error(error.response?.data?.message)
         }
     },
+    genResult:async(id)=>{
+        try{
+
+            const res=await axiosInstance.post(`/polls/generateResult/${id}`);
+            toast.success(res.data.message)
+        }
+        catch(error){
+            toast.error(error.response.data.message);
+        }
+
+
+    }
     
 }))

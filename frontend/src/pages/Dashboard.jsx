@@ -15,19 +15,19 @@ useEffect(() => {
    return (
     <div className="p-6 space-y-6">
       <div className="grid grid-cols-4 gap-4">
-        <div className="bg-gray-200 p-4 rounded-xl text-center">
+        <div className="bg-red-200 p-4 rounded-xl text-center">
           <h3>Total Polls</h3>
           <p className="text-2xl font-bold">{stats?.totalPolls}</p>
         </div>
-        <div className="bg-gray-200 p-4 rounded-xl text-center">
+        <div className="bg-red-200 p-4 rounded-xl text-center">
           <h3>Total Votes</h3>
           <p className="text-2xl font-bold">{stats?.totalVotes}</p>
         </div>
-        <div className="bg-gray-200 p-4 rounded-xl text-center">
+        <div className="bg-red-200 p-4 rounded-xl text-center">
           <h3>Engagement Ratio</h3>
           <p className="text-2xl font-bold">{stats?.engagementRatio}</p>
         </div>
-        <div className="bg-gray-200 p-4 rounded-xl text-center">
+        <div className="bg-red-200 p-4 rounded-xl text-center">
           <h3>Most Active Users</h3>
           <p className="text-2xl font-bold">1234</p>
         </div>

@@ -10,7 +10,7 @@ const Navbar = () => {
         logout();
     }
   return (
-   <nav className='text-black px-6 py-3 flex justify-between items-center'>
+   <nav className='text-black px-6 py-3 m-8 flex justify-between items-center border border-black bg-gray-400 shadow-md rounded-xl'>
    <div className='flex items-center gap-8'>
 
     <Link to="/" className='text-2xl font-bold px-20'>
@@ -27,8 +27,8 @@ const Navbar = () => {
       {
         user?(
             <>
-                <button onClick={handleLogout} className='bg-red-400 rounded-md p-2'>Logout</button>
-                <p className='text-xl bg-gray-400 rounded-full p-2'>{(user.name)}</p>
+                <button onClick={handleLogout} className='bg-gray-800 text-white text-bold border border-black p-2 rounded-md'>Logout</button>
+                <p className='text-xl bg-red-400 border border-black rounded-full w-12 h-12 flex items-center justify-center'>{user.name.charAt(0).toUpperCase()}</p>
             </>
         ):(
             <>

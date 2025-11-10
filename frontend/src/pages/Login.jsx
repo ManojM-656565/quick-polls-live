@@ -20,8 +20,8 @@ const Login = () => {
         navigate('/')
     }
   return (
-  <div className="min-h-screen flex justify-center items-center bg-gray-100">
-      <div className="w-full max-w-md bg-white rounded-lg p-6">
+  <div className="flex justify-center items-center">
+      <div className="w-full max-w-md border border-black bg-white rounded-lg p-8">
         <div className="text-center mb-6">
           
           <h1 className="text-2xl font-bold mt-2">Log In</h1>
@@ -62,7 +62,7 @@ const Login = () => {
             </div>
           </div>
 
-          <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600" >
+          <button type="submit" className="w-full bg-red-500 text-white py-2 rounded" >
             Login
           </button>
         </form>
@@ -70,7 +70,7 @@ const Login = () => {
         <div className="text-center mt-4">
           <p className="text-gray-500">
             Didn't have an account?{' '}
-            <Link to="/register" className="text-blue-500 hover:underline">
+            <Link to="/register" className="text-red-500">
               Creat Account
             </Link>
           </p>
