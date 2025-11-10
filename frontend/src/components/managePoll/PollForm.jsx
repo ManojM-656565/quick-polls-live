@@ -42,7 +42,7 @@ const PollForm = () => {
     }
   return (
     <div className='p-6'>
-        <h3 className='text-2xl p-6'>Create New Poll</h3>
+        <h3 className='text-2xl py-4'>Create New Poll</h3>
           <form onSubmit={handleSubmit} className="space-y-4">
                 
                 <div>
@@ -53,7 +53,7 @@ const PollForm = () => {
                         value={pollData.title}
                         onChange={handleChange}
                         required
-                        className="w-full p-2 border border-gray-300 rounded-md"
+                        className="w-full p-2 border border-black rounded-md"
                     />
                 </div>
 
@@ -64,7 +64,7 @@ const PollForm = () => {
                         value={pollData.description}
                         onChange={handleChange}
                         rows="3"
-                        className="w-full p-2 border border-gray-300 rounded-md"
+                        className="w-full p-2 border border-black rounded-md"
                     ></textarea>
                 </div>
 

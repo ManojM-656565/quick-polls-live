@@ -6,6 +6,8 @@ export const usePollForm=create((set,get)=>({
 
     polls:[],
     allPolls:[],
+    resultData:null,
+
     create: async(data)=>{
         try{
             const res=await axiosInstance.post("/polls/create",data);
@@ -42,6 +44,8 @@ export const usePollForm=create((set,get)=>({
         try{
 
             const res=await axiosInstance.post(`/polls/generateResult/${id}`);
+            set({resultData:res.data.result});
+            console.log(res.data.result);
             toast.success(res.data.message)
         }
         catch(error){
@@ -49,6 +53,9 @@ export const usePollForm=create((set,get)=>({
         }
 
 
+    },
+    clearResult:()=>{
+        set({resultData:null})
     }
     
 }))

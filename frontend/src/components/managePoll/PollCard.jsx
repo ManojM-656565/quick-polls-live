@@ -1,5 +1,6 @@
 import React from "react";
 import { usePollForm } from "../../store/usePollStore";
+import ResultModal from "./ResultModal";
 
 const PollCard = ({ poll }) => {
   const { _id:pollId,title, status, createdBy, expiryTime } = poll;
@@ -15,9 +16,12 @@ const PollCard = ({ poll }) => {
   });
   const handleResult=()=>{
     genResult(pollId);
+
   }
 
   return (
+    <>
+
     <div className="p-4 border-4 border-red-300">
       <h4 className="text-lg font-semibold mb-2">{title}</h4>
       <div className="text-sm space-y-1 mb-4">
@@ -40,6 +44,8 @@ const PollCard = ({ poll }) => {
         </button>
       </div>
     </div>
+    <ResultModal/>
+    </>
   );
 };
 

@@ -2,6 +2,8 @@ const mongoose=require('mongoose')
 
 const resultSchema=new mongoose.Schema({
     pollId:{type:mongoose.Schema.Types.ObjectId,ref:"Poll",required:true},
+    title:{type:String},
+    description:{type:String},
     options:[
         {
             optionId:{type:mongoose.Schema.Types.ObjectId,required:true},

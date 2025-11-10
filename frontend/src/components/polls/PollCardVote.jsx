@@ -2,10 +2,18 @@ import React from 'react'
 import { useState } from 'react';
 import { axiosInstance } from '../../../lib/axios';
 import toast from 'react-hot-toast';
+import { usePollForm } from '../../store/usePollStore';
+import ResultModal from '../managePoll/ResultModal';
 
 const PollCardVote = ({poll}) => {
     const [selectedOption, setSelectedOption] = useState(null);
     const {_id:pollId,title,description,options,status}=poll
+
+    const{genResult}=usePollForm();
+      const handleResult=()=>{
+    genResult(pollId);
+
+  }
 
     const handleSubmit=async(e)=>{
         e.preventDefault();
@@ -22,10 +30,13 @@ const PollCardVote = ({poll}) => {
         }
     }
   return (
+    <>
+
 
     <div className='p-6 shadow-md rounded-lg border-2 border-red-200'>
     <h3 className='text-xl font-bold mb-2 text-red-400'>{title}</h3>
     <p className='text=gray-400 mb-4'>{description}</p>
+    <p className='text=gray-400 mb-4'>{status.toUpperCase()}</p>
     <form onSubmit={handleSubmit} className="space-y-3">
                 <div className="space-y-2">
                     {options.map((option) => (
@@ -52,10 +63,10 @@ const PollCardVote = ({poll}) => {
 
                 <button
                     type="submit"
+                    onClick={handleResult}
                     className="w-full py-2 px-4 mt-4 bg-gray-600 text-white font-semibold rounded-md"
-                    disabled
                 >
-                    Poll Expired
+                    View Results
                 </button>
                 :
                 <button
@@ -70,6 +81,8 @@ const PollCardVote = ({poll}) => {
                
             </form>
     </div>
+    <ResultModal/>
+    </>
   )
 }
 
