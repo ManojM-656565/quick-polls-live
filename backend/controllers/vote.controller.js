@@ -1,3 +1,4 @@
+const activityLogModel = require("../models/activityLog.model");
 const Poll=require("../models/poll.model")
 const Vote=require("../models/vote.model")
 
@@ -28,6 +29,10 @@ const castVote=async(req,res)=>{
         ///socket io for future
          const updatedPoll = await Poll.findById(pollId);
          io.emit("voteUpdate", updatedPoll);
+          await activityLogModel.create({
+               user:req.user._id,
+               actionType:"voted"
+             });
 
         res.status(200).json({message:"Vote casted successfully",vote});
     }

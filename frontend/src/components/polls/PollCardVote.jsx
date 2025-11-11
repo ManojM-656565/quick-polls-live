@@ -62,7 +62,7 @@ const PollCardVote = ({poll}) => {
                {status==="expired"?
 
                 <button
-                    type="submit"
+                    type="button"
                     onClick={handleResult}
                     className="w-full py-2 px-4 mt-4 bg-gray-600 text-white font-semibold rounded-md"
                 >

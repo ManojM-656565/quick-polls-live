@@ -1,3 +1,4 @@
+const activityLogModel = require("../models/activityLog.model");
 const Poll = require("../models/poll.model");
 const Result = require("../models/result.model");
 
@@ -19,7 +20,10 @@ const create = async (req, res) => {
       createdBy: req.user._id,
     });
     // await poll.save();
-
+    await activityLogModel.create({
+      user:req.user._id,
+      actionType:"created_poll"
+    });
     res.status(201).json({
       message: "Poll created successfully",
       poll,

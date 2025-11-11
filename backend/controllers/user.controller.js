@@ -1,6 +1,7 @@
 const userModel = require("../models/user.model");
 const bcrypt=require('bcryptjs');
 const jwt=require('jsonwebtoken');
+const activityLogModel = require("../models/activityLog.model");
 
 const register=async(req,res)=>{
     const{name,password,email,role}=req.body;
@@ -61,7 +62,11 @@ const login=async(req,res)=>{
             httpOnly:true,
             secure:process.env.NODE_ENV==="production",
             maxAge:24*60*60*1000
-        })
+        });
+             await activityLogModel.create({
+                       user:req?.user?._id,
+                       actionType:"login"
+                     });
         res.status(201).json({
             message:"User Logged In successfully",
             user:{
@@ -81,12 +86,17 @@ const login=async(req,res)=>{
 
 const logout=async(req,res)=>{
     try{
+        await activityLogModel.create({
+                  user:req?.user?._id,
+                  actionType:"logout"
+                });
         res.cookie("token","",{
             maxAge:0
         });
         res.status(200).json({message:"Logged out successfully"})
     }
     catch(error){
+        console.error(error)
         res.status(500).json({message:"Internal server error"});
     }
 }
