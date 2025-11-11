@@ -29,7 +29,7 @@ useEffect(() => {
         </div>
         <div className="bg-red-200 p-4 rounded-xl text-center">
           <h3>Most Active Users</h3>
-          <p className="text-2xl font-bold">1234</p>
+          <p className="text-2xl font-bold">2</p>
         </div>
       </div>
       <div>

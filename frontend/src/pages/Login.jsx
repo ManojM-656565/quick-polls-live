@@ -37,7 +37,7 @@ const Login = () => {
           
               <input
                 type="email"
-                className="w-full border p-2 pl-10 rounded"
+                className="w-full border p-2 rounded"
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               />
@@ -50,7 +50,7 @@ const Login = () => {
            
               <input
                 type={"text"}
-                className="w-full border p-2 pl-10 rounded"
+                className="w-full border p-2 rounded"
                 value={formData.password}
                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
               />
