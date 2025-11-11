@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 import { usePollForm } from '../../store/usePollStore';
 
-const PollForm = () => {
+const PollForm = ({fetchPolls}) => {
     const {create}=usePollForm();
     const [pollData,setPollData]=useState({
         title:"",
@@ -33,6 +33,7 @@ const PollForm = () => {
     const handleSubmit=async(e)=>{
         e.preventDefault();
         create(pollData);
+        fetchPolls();
         setPollData({
             title:'',
             description:'',
@@ -42,7 +43,7 @@ const PollForm = () => {
     }
   return (
     <div className='p-6'>
-        <h3 className='text-2xl py-4'>Create New Poll</h3>
+        <h2 className='text-3xl font-bold py-4'>Create New Poll</h2>
           <form onSubmit={handleSubmit} className="space-y-4">
                 
                 <div>

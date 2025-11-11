@@ -22,7 +22,7 @@ const PollCard = ({ poll }) => {
   return (
     <>
 
-    <div className="p-4 border-4 border-red-300">
+    <div className="p-4 border-red-300 rounded-md shadow-md">
       <h4 className="text-lg font-semibold mb-2">{title}</h4>
       <div className="text-sm space-y-1 mb-4">
         <p>
@@ -33,15 +33,15 @@ const PollCard = ({ poll }) => {
       </div>
 
       <div className="flex flex-wrap gap-2">
-        <button className="py-1 px-3 text-sm bg-red-500 text-white rounded-md">
+        {/* <button className="py-1 px-3 text-sm bg-red-500 text-white rounded-md">
           Edit
+        </button> */}
+        <button onClick={handleResult} className="p-4 text-sm bg-red-600 text-white rounded-md">
+          Generate Result
         </button>
-        <button onClick={handleResult} className="py-1 px-3 text-sm bg-red-600 text-white rounded-md">
-          Gen Result
-        </button>
-        <button className="py-1 px-3 text-sm bg-red-600 text-white rounded-md">
+        {/* <button className="py-1 px-3 text-sm bg-red-600 text-white rounded-md">
           Delete
-        </button>
+        </button> */}
       </div>
     </div>
     <ResultModal/>

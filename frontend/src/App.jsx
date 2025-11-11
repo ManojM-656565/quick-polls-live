@@ -9,6 +9,7 @@ import Dashboard from "./pages/Dashboard";
 import { useAuthStore } from "./store/useAuthStore";
 import { useEffect } from "react";
 import { useDashboardStore } from "./store/useDashboard";
+import Footer from "./components/Footer";
 
 export default function App() {
   const { user, checkAuth } = useAuthStore();
@@ -24,7 +25,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <Toaster />
-      <div className="min-h-screen flex flex-col">
+      <div className="min-h-screen font-mono  flex flex-col">
         <Navbar />
         <main className="flex-1 p-6">
           <Routes>
@@ -55,6 +56,7 @@ export default function App() {
             <Route path="*" element={<Navigate to="/dashboard" replace />} />
           </Routes>
         </main>
+        <Footer/>
       </div>
     </BrowserRouter>
   );

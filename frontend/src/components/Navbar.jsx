@@ -16,10 +16,10 @@ const Navbar = () => {
     <Link to="/" className='text-2xl font-bold px-20'>
         Quick Polls Live
     </Link>
-    <div className='flex gap-6 text-xl font-medium'>
-    <Link to='/dashboard'>Dashboard</Link>
-    <Link to='/polls'>Polls</Link>
-    <Link to='/manage'>Manage Poll</Link>
+    <div className='flex gap-6 font-medium'>
+    <Link to='/dashboard' className='hover:underline'>Dashboard</Link>
+    <Link to='/polls' className='hover:underline'>Polls</Link>
+    <Link to='/manage' className='hover:underline'>Manage Poll</Link>
     </div>
    </div>
 
