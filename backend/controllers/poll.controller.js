@@ -35,7 +35,18 @@ const getAll = async (req, res) => {
     const polls = await Poll.find()
       .populate("createdBy", "name email")
       .sort({ createdAt: -1 });
-    res.status(200).json({ polls });
+       const now=new Date();
+      const expiredPollIds=polls.filter((poll)=>new Date(poll.expiryTime)<now&&poll.status!=="expired").map((poll)=>poll._id);
+
+      if(expiredPollIds.length>0){
+        await Poll.updateMany(
+          {_id:{$in:expiredPollIds}},
+          {$set:{status:"expired"}}
+        );
+      }
+    
+      const finalPolls=await Poll.find().populate("createdBy","name email").sort({createdAt:-1})
+    res.status(200).json({ polls:finalPolls });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal Server Error" });
@@ -47,7 +58,19 @@ const getPolls = async (req, res) => {
     const polls = await Poll.find({ createdBy: req.user._id })
       .populate("createdBy", "name email")
       .sort({ createdAt: -1 });
-    res.status(200).json({ polls });
+
+      const now=new Date();
+      const expiredPollIds=polls.filter((poll)=>new Date(poll.expiryTime)<now&&poll.status!=="expired").map((poll)=>poll._id);
+
+      if(expiredPollIds.length>0){
+        await Poll.updateMany(
+          {_id:{$in:expiredPollIds}},
+          {$set:{status:"expired"}}
+        );
+      }
+    
+      const finalPolls=await Poll.find({createdBy: req.user._id}).populate("createdBy","name email").sort({createdAt:-1})
+    res.status(200).json({polls: finalPolls });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal server error" });

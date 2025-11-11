@@ -39,7 +39,7 @@ const ResultModal = () => {
 
           <Dialog.Close asChild>
             <button className="mt-6 w-full bg-red-600 text-white py-2 rounded-md">
-              Close
+              &times
             </button>
           </Dialog.Close>
         </Dialog.Content>

@@ -36,7 +36,7 @@ const PollCard = ({ poll }) => {
         {/* <button className="py-1 px-3 text-sm bg-red-500 text-white rounded-md">
           Edit
         </button> */}
-        <button onClick={handleResult} className="p-4 text-sm bg-red-600 text-white rounded-md">
+        <button onClick={handleResult} className="p-4 text-sm bg-red-600 text-white text-bold rounded-md">
           Generate Result
         </button>
         {/* <button className="py-1 px-3 text-sm bg-red-600 text-white rounded-md">
