@@ -12,7 +12,6 @@ export const usePollForm=create((set,get)=>({
     create: async(data)=>{
         try{
             const res=await axiosInstance.post("/polls/create",data);
-            toast.success(res.data.message)
         }
         catch(error){
               toast.error(error.response?.data?.message);
@@ -25,7 +24,6 @@ export const usePollForm=create((set,get)=>({
    console.log(res);
 
             set({polls:res.data.polls});
-            toast.success(res.data.message||"The Data Fetched Successfully");
         }
         catch(error){
             toast.error(error.response?.data?.message)
