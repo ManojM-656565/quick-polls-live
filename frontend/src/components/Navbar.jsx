@@ -10,7 +10,7 @@ const Navbar = () => {
         logout();
     }
   return (
-   <nav className='text-black px-6 py-3 m-8 flex justify-between items-center border border-black bg-gray-400 shadow-md rounded-xl'>
+   <nav className='text-black px-6 py-3 m-8 flex justify-between items-center bg-gray-300 shadow-lg rounded-2xl'>
    <div className='flex items-center gap-8'>
 
     <Link to="/" className='text-2xl font-bold px-20'>
